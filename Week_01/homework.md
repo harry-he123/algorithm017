@@ -226,6 +226,59 @@ func reverseList(head *ListNode) *ListNode {
 }
 ```
 #### 24. 两两交换链表中的节点
+```py
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+
+        h = ListNode(None)
+        pre, cur = h, head
+
+        while cur and cur.next:
+            n = cur.next.next
+
+            pre.next = cur.next
+            cur.next.next = cur
+            cur.next = None 
+            pre = cur
+
+            cur = n
+
+        pre.next = cur
+
+        return h.next
+
+```
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func swapPairs(head *ListNode) *ListNode {
+    h := new(ListNode)
+    pre, cur := h, head
+
+    for cur != nil && cur.Next != nil{
+        n := cur.Next.Next
+
+        pre.Next = cur.Next
+        cur.Next.Next = cur
+        cur.Next = nil
+        pre = cur
+        cur = n
+    }
+    pre.Next = cur
+
+    return h.Next
+}
+```
 
 
 #### 141. 环形链表
