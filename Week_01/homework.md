@@ -1,4 +1,38 @@
 #### 15. 三数之和
+```go
+func threeSum(nums []int) [][]int {
+    var ans = [][]int{}
+
+    sort.Ints(nums)
+
+    for i:= 0; i < len(nums) - 2; i++{
+        if i > 0 && nums[i] == nums[i - 1]{
+            continue
+        }
+
+        sum_ := -nums[i]
+        l, r := i + 1, len(nums) - 1
+
+        for l < r{
+            if l > i + 1 && nums[l] == nums[l - 1]{
+                l ++
+                continue
+            }
+
+            t := nums[l] + nums[r]
+            if t == sum_{
+                ans = append(ans, []int{nums[i], nums[l], nums[r]})
+                l ++
+            }else if t < sum_{
+                l ++
+            }else{
+                r --
+            }
+        }
+    }
+    return ans
+}
+```
 
 #### 11.盛最多水的容器
 ```py
