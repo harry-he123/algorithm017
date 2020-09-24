@@ -161,3 +161,80 @@ func twoSum(nums []int, target int) []int {
     return ans
 }
 ```
+
+#### 206. 反转链表
+```py
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        pre = None
+        cur = head
+
+        while cur:
+            pre, cur.next, cur = cur, pre, cur.next
+        
+        return pre
+```
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseList(head *ListNode) *ListNode {
+    var pre *ListNode
+    cur := head
+
+    for cur != nil{
+        pre, cur.Next, cur = cur, pre, cur.Next
+    }
+
+    return pre
+}
+```
+
+```py
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:  return head
+
+        p = self.reverseList(head.next)
+
+        head.next.next = head
+        head.next = None
+
+        return p
+```
+```go
+func reverseList(head *ListNode) *ListNode {
+    if head == nil || head.Next == nil{ return head }
+
+    p := reverseList(head.Next)
+
+    head.Next.Next = head
+    head.Next = nil
+
+    return p
+}
+```
+#### 24. 两两交换链表中的节点
+
+
+#### 141. 环形链表
+
+
+#### 142. 环形链表II
+
+
+
+#### 25.K个一组翻转链表
+
+
