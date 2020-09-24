@@ -233,6 +233,91 @@ func reverseList(head *ListNode) *ListNode {
 
 #### 142. 环形链表II
 
+#### 20. 有效的括号
+
+#### 155. 最小栈
+```python
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.min_stack = []
+
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+
+        if not self.min_stack or x <= self.min_stack[-1]:
+            self.min_stack.append(x)
+
+    def pop(self) -> None:
+        if self.stack:
+            x = self.stack.pop()
+
+            if self.min_stack and self.min_stack[-1] == x:
+                self.min_stack.pop()
+
+    def top(self) -> int:
+        if self.stack:
+            return self.stack[-1]
+
+    def getMin(self) -> int:
+        if self.min_stack:
+            return self.min_stack[-1]
+```
+```go
+type MinStack struct {
+    stack []int
+    min_stack []int
+}
+/** initialize your data structure here. */
+func Constructor() MinStack {
+    return MinStack{[]int{}, []int{}}
+}
+
+func (this *MinStack) Push(x int)  {
+    this.stack = append(this.stack, x)
+
+    if len(this.min_stack) == 0 || x <= this.min_stack[len(this.min_stack) - 1]{
+        this.min_stack = append(this.min_stack, x)
+    }
+}
+
+func (this *MinStack) Pop()  {
+    x := this.stack[len(this.stack) - 1]
+
+    if len(this.min_stack) > 0 && this.min_stack[len(this.min_stack) - 1] == x{
+        this.min_stack = this.min_stack[:len(this.min_stack) - 1]
+    }
+
+    this.stack = this.stack[:len(this.stack) - 1]
+}
+
+
+func (this *MinStack) Top() int {
+    return this.stack[len(this.stack) - 1]
+}
+
+
+func (this *MinStack) GetMin() int {
+    return this.min_stack[len(this.min_stack) - 1]
+}
+```
+
+#### 84. 柱状图中最大的矩形
+
+#### 239. 滑动窗口最大值
+
+#### 42. 接雨水
+
+#### 641. 设计循环双端队列
+
+
+
+
 
 
 #### 25.K个一组翻转链表
