@@ -1,7 +1,56 @@
 #### 15. 三数之和
 
 #### 11.盛最多水的容器
+```py
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        ans = 0
+        l, r = 0, len(height) - 1
 
+        while l < r:
+            area = (r - l) * min(height[l], height[r])
+
+            if area > ans:
+                ans = area
+            
+            if height[r] > height[l]:
+                l += 1
+            else:
+                r -= 1
+
+        return ans
+```
+```go
+func maxArea(height []int) int {
+    var(
+        ans = 0
+
+        area = func(l,r int) int{
+            h := height[l]
+
+            if height[r] < h{
+                h = height[r]
+            }
+
+            return h * (r - l)
+        }
+    )
+
+    for l,r := 0, len(height) - 1; l < r;{
+        if a := area(l, r); a > ans{
+            ans = a
+        }
+
+        if height[l] < height[r]{
+            l ++
+        }else{
+            r --
+        }
+    }
+   
+    return ans
+}
+```
 
 #### 70.爬楼梯
 ```go
