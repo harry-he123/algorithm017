@@ -234,6 +234,43 @@ func reverseList(head *ListNode) *ListNode {
 #### 142. 环形链表II
 
 #### 20. 有效的括号
+```py
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = ['head']
+        left = ('(', '[', '{')
+        right = (')', ']', '}')
+        for v in s:
+            if v in left:
+                stack.append(v)
+            else:
+                if stack.pop() != left[right.index(v)]:
+                    return False
+        return len(stack) == 1
+```
+```go
+func isValid(s string) bool {
+    var stack = []rune{'1'}
+    var hash = map[rune]rune{
+        ')' : '(',
+        ']' : '[',
+        '}' : '{',
+    }
+    for _, char := range s{
+        val, ok := hash[char]
+        if ok{
+            if val != stack[len(stack) - 1]{
+                return false
+            }
+            stack = stack[:len(stack) - 1]
+        }else{
+            stack = append(stack, char)
+        }
+
+    } 
+    return len(stack) == 1   
+}
+```
 
 #### 155. 最小栈
 ```python
