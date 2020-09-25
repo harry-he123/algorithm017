@@ -282,9 +282,58 @@ func swapPairs(head *ListNode) *ListNode {
 
 
 #### 141. 环形链表
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func hasCycle(head *ListNode) bool {
+    if head == nil{ return false }   
+
+    slow, fast := head, head.Next
+
+    for fast != nil && fast.Next != nil{
+        if fast == slow{
+            return true
+        }
+        fast, slow = fast.Next.Next, slow.Next
+    }
+
+    return false
+}
+```
 
 
 #### 142. 环形链表II
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func detectCycle(head *ListNode) *ListNode {
+    var(
+        d = map[*ListNode]struct{}{}
+        ans *ListNode
+        cur = head
+    )
+    for cur != nil{
+        if _,ok := d[cur]; ok{
+            ans = cur
+            break
+        }
+        d[cur] = struct{}{}
+        cur = cur.Next
+    }
+    return ans
+}
+```
+
 
 #### 20. 有效的括号
 ```py
@@ -404,11 +453,6 @@ func (this *MinStack) GetMin() int {
 #### 42. 接雨水
 
 #### 641. 设计循环双端队列
-
-
-
-
-
 
 #### 25.K个一组翻转链表
 
