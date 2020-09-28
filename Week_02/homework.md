@@ -83,8 +83,112 @@ func groupAnagrams(strs []string) [][]string {
 
 
 #### 二叉树的中序遍历
+```go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func inorderTraversal(root *TreeNode) []int {
+    var ans = []int{}
+    var inorder func (node *TreeNode)
 
+    inorder = func (node *TreeNode){
+        if node == nil{ return }
+
+        inorder(node.Left)
+        ans = append(ans, node.Val)
+        inorder(node.Right)
+
+    }
+
+    inorder(root)
+
+    return ans
+}
+```
+```go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func inorderTraversal(root *TreeNode) []int {
+    var ans = []int{}
+    var cur = root
+    var stack = []*TreeNode{}
+
+    for cur != nil || len(stack) > 0{
+        for cur != nil{
+            stack = append(stack, cur)
+            cur = cur.Left
+        }
+
+        cur = stack[len(stack) - 1]
+        stack = stack[:len(stack) - 1]
+        ans = append(ans, cur.Val)
+        cur = cur.Right
+    }
+
+    return ans
+}
+```
 #### 二叉树的前序遍历
+```go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func preorderTraversal(root *TreeNode) []int {
+    var (
+        ans = make([]int, 0)
+        preorder func(node *TreeNode)
+    )
+    
+    preorder = func(node *TreeNode){
+        if node != nil{
+            ans = append(ans, node.Val)
+            preorder(node.Left)
+            preorder(node.Right)
+        }
+    }
+
+    preorder(root)
+    
+    return ans
+}
+```
+
+```go
+func preorderTraversal(root *TreeNode) []int {
+    var(
+        ans = make([]int, 0)
+        stack []*TreeNode
+    )
+    if root != nil{ stack = []*TreeNode{root}}
+    
+    for len(stack) > 0{
+        end := len(stack) -1 
+        node := stack[end]
+        stack = stack[:end]
+
+        ans = append(ans, node.Val)
+        if node.Right != nil{ stack = append(stack, node.Right) }
+        if node.Left != nil{ stack = append(stack, node.Left) }
+    }
+    return ans
+}
+```
 
 #### N 叉树的后序遍历
 
