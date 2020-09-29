@@ -1,5 +1,4 @@
-
-#### 242. 有效的字母异位词
+#### 242.有效的字母异位词
 ```go
 func isAnagram(s string, t string) bool {
     if len(s) != len(t){return false}
@@ -35,7 +34,7 @@ class Solution:
         return not any(arr) # arr中所有元素应该都为0
 ```
 
-#### 49. 字母异位词分组
+#### 49.字母异位词分组
 ```py
 from collections import defaultdict
 
@@ -190,7 +189,7 @@ func preorderTraversal(root *TreeNode) []int {
 }
 ```
 
-#### N 叉树的后序遍历
+#### N叉树的后序遍历
 ```go
 /**
  * Definition for a Node.
@@ -258,7 +257,7 @@ func postorder(root *Node) []int {
 ```
 
 
-#### N 叉树的前序遍历
+#### N叉树的前序遍历
 ```go
 /**
  * Definition for a Node.
@@ -322,5 +321,37 @@ func preorder(root *Node) []int {
 ```
 
 
-#### N 叉树的层序遍历
+#### N叉树的层序遍历
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func levelOrder(root *Node) [][]int {
+    var (
+        ans = make([][]int, 0)
+        queue []*Node
+    )
+    if root != nil{
+        queue = []*Node{ root }
+    }
+
+    for len(queue) > 0{
+        len_ := len(queue)
+        t := make([]int, len_)
+        for i := 0; i < len_; i++{
+            t[i] = queue[i].Val
+            queue = append(queue, queue[i].Children...)
+        }
+        queue = queue[len_:]
+        ans = append(ans, t)
+    }
+
+    return ans
+}
+```
 
