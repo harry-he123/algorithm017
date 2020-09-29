@@ -191,8 +191,136 @@ func preorderTraversal(root *TreeNode) []int {
 ```
 
 #### N 叉树的后序遍历
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func postorder(root *Node) []int {
+    var(
+        ans = make([]int, 0)
+        pOrder func(node *Node)
+    )
+
+    pOrder = func(node *Node){
+        if node != nil{
+            for _, n := range node.Children{
+                pOrder(n)
+            }
+            ans = append(ans, node.Val)
+        }
+    }
+    pOrder(root)
+
+    return ans
+}
+```
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func postorder(root *Node) []int {
+    var(
+        ans = make([]int, 0)
+        stack []*Node
+    )
+    if root != nil{
+        stack = []*Node{root}
+    }
+
+    for len(stack) > 0{
+        end := len(stack) - 1
+        n := stack[end]
+
+        ans = append(ans, n.Val)
+        
+        cp := make([]*Node, end + len(n.Children))
+        copy(cp[:end], stack)
+        copy(cp[end:], n.Children)
+        stack = cp
+    }
+
+    for i, j := 0, len(ans)-1; i < j; i, j = i+1, j-1 {
+        ans[i], ans[j] = ans[j], ans[i]
+    }
+    
+    return ans
+}
+```
+
 
 #### N 叉树的前序遍历
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func preorder(root *Node) []int {
+    var ans = []int{}
+    var pre func(node *Node)
+    
+    pre = func(node *Node){
+        if node != nil{
+            ans = append(ans, node.Val)
+
+            for _, child := range node.Children{
+                pre(child)
+            }
+        }
+    }
+    
+    pre(root)
+
+    return ans
+}
+```
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func preorder(root *Node) []int {
+    var(
+        ans = make([]int, 0)
+        stack []*Node
+    )
+    if root != nil{
+        stack = []*Node{ root }
+    }
+
+    for len(stack) > 0{
+        end := len(stack) - 1
+        node := stack[end]
+
+        ans = append(ans, node.Val)
+
+        stack = stack[:end]
+        children := node.Children
+        for i := len(children) - 1; i >=0; i--{
+            stack = append(stack, children[i])
+        }
+    }
+    return ans
+}
+```
+
 
 #### N 叉树的层序遍历
 
